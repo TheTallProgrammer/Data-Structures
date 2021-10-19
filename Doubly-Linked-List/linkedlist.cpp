@@ -23,21 +23,21 @@ bool LinkedList::addNode(int id, string *new_data) {
     bool didAdd = false;
     Node *position = head;
     Node *prevPos = head;
-    int hasDupe = false;
 
     if(id >= 0 && new_data->length() > 0 ) {
-        while ((head != nullptr) && id > position->data.id && position->next != nullptr && !hasDupe) {// Loops through the list to find a spot for the node
-            if (id == position->data.id) { hasDupe = true; }
+        while ((head != nullptr) && id > position->data.id && position->next != nullptr) {// Loops through the list to find a spot for the node
             prevPos = position;// Makes the prevPos behind the position
             position = position->next;
-        } if (head == nullptr && !hasDupe) {// First head node
+        }if(head!= nullptr && id == position->data.id){}
+        else if (head == nullptr) {// First head node
             Node *newNode = new Node();
             initializeNode(&id, new_data, newNode);
             head = newNode;
             didAdd = true;
-        } else if (head != nullptr && !hasDupe){
+        } else if (head != nullptr){
             Node *newNode = new Node();
             initializeNode(&id, new_data, newNode);
+            std::cout << "checkOperation. ID: " << id << ", position ID: " << position->data.id << std::endl;
             didAdd = checkOperation(prevPos, position, newNode, &id);
         }
     }
@@ -162,8 +162,8 @@ bool LinkedList::checkOperation(Node *prevPos, Node *position, Node *newNode, in
 
     bool didAdd = false;
 
-    if(*id == position->data.id){}
-    else if(head->data.id > newNode->data.id){// new head
+//    if(*id == position->data.id){}
+    if(head->data.id > newNode->data.id){// new head
         insertHead(newNode);
         didAdd = true;
     }
