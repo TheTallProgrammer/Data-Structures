@@ -28,7 +28,7 @@ bool LinkedList::addNode(int id, string *new_data) {
         while ((head != nullptr) && id > position->data.id && position->next != nullptr) {// Loops through the list to find a spot for the node
             prevPos = position;// Makes the prevPos behind the position
             position = position->next;
-        }if(head!= nullptr && id == position->data.id){}
+        }if(head != nullptr && id == position->data.id){}
         else if (head == nullptr) {// First head node
             Node *newNode = new Node();
             initializeNode(&id, new_data, newNode);
@@ -37,7 +37,6 @@ bool LinkedList::addNode(int id, string *new_data) {
         } else if (head != nullptr){
             Node *newNode = new Node();
             initializeNode(&id, new_data, newNode);
-            std::cout << "checkOperation. ID: " << id << ", position ID: " << position->data.id << std::endl;
             didAdd = checkOperation(prevPos, position, newNode, &id);
         }
     }
